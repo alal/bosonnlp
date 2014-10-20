@@ -11,7 +11,7 @@ p ['很好吃, 有点贵', '贵了点, 好吃',
 p ['病毒式媒体网站：让新闻迅速蔓延'].s_keywords
 
 # -----------------------------------------
-# You can pass your token like `Bosonnlp.new("<your token from bosonnlp.com>"`
+# You can pass your token like `Bosonnlp.new("<your token from bosonnlp.com>")`
 nlp = Bosonnlp.new
 
 p nlp.c_sentiment(['美好','悲惨'])
@@ -25,7 +25,7 @@ p nlp.c_classify(['俄否决安理会谴责叙军战机空袭阿勒颇平民',
 
 # ------------ mutiple texts API ------------------
 p nlp.m_cluster(['今天天气好', '今天天气好', '今天天气不错', '点点楼头细雨',\
-                  '重重江外平湖', '当年戏马会东徐', '今日凄凉南浦'])
+                 '重重江外平湖', '当年戏马会东徐', '今日凄凉南浦'])
 p nlp.m_comments(['很好吃, 有点贵', '贵了点, 好吃',
                   '价格贵, 但很好吃', '很好吃, 但很贵'])
 
@@ -40,11 +40,11 @@ mh.push(['很好吃, 有点贵', '贵了点, 好吃']) #  Yes, do it incremental
 mh.analysis
 p mh.result
 
-mh.clear  #clear the texts.
+mh.clear  # clear the texts.
 
 # -------------------------------------
 #p nlp.s_time(['2013年二月二十八日下午四点三十分二十九秒'])
 p nlp.s_keywords(['病毒式媒体网站：让新闻迅速蔓延'])
 #-------------- with query --------
 query = { 'top_k' => 3 }
-p nlp.s_suggest(['粉丝'], {:query => query})
+p nlp.s_suggest(['粉丝'], :query => query)
