@@ -1,7 +1,9 @@
 require 'bosonnlp'
 
-# --------------------------------------------
-# run `export BOSON_API_TOKEN="<your token from bosonnlp.com>"` first.
+# run `export BOSON_API_TOKEN="<your token from bosonnlp.com>"` first. e,g,
+#     `export BOSON_API_TOKEN="bmw.1999.eW91ciB0b2tl"`
+
+# -------------- string and list style ----------------
 p '美好'.c_sentiment
 p ['美好', '悲惨'].c_sentiment
 
@@ -10,7 +12,7 @@ p ['很好吃, 有点贵', '贵了点, 好吃',
 
 p ['病毒式媒体网站：让新闻迅速蔓延'].s_keywords
 
-# -----------------------------------------
+# ------------------- normal style --------------------
 # You can pass your token like `Bosonnlp.new("<your token from bosonnlp.com>")`
 nlp = Bosonnlp.new
 
@@ -29,22 +31,23 @@ p nlp.m_cluster(['今天天气好', '今天天气好', '今天天气不错', '�
 p nlp.m_comments(['很好吃, 有点贵', '贵了点, 好吃',
                   '价格贵, 但很好吃', '很好吃, 但很贵'])
 
-# --- mannaly push mutiple times for large amount of texts. ---
+# -- push more than one time (Handle large amount of texts with mutiple API) --
 mh = nlp.create_multiple(:comments)
 mh.push(['很好吃, 有点贵', '贵了点, 好吃'])
 mh.push(['价格贵, 但很好吃', '很好吃, 但很贵'])
-mh.analysis  # Will cost some time on server side.
-p mh.result  # Will block until get result from server.
+mh.analysis  # Start computing on the server.
+p mh.result  # Call this will block the client until get result from the server.
 
-mh.push(['很好吃, 有点贵', '贵了点, 好吃']) #  Yes, do it incrementally!
+mh.push(['很好吃, 有点贵', '贵了点, 好吃']) #  Yes, play incrementally!
 mh.analysis
 p mh.result
 
-mh.clear  # clear the texts.
+mh.clear  # Clear the texts.
 
 # -------------------------------------
 #p nlp.s_time(['2013年二月二十八日下午四点三十分二十九秒'])
 p nlp.s_keywords(['病毒式媒体网站：让新闻迅速蔓延'])
-#-------------- with query --------
+
+# ----------- Handle extra param ------------
 query = { 'top_k' => 3 }
 p nlp.s_suggest(['粉丝'], :query => query)
