@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   s.description = 'bosonnlp.com'
   s.files = FileList['lib/*.rb', 'lib/bosonnlp/*.rb']
   s.require_path = 'lib'
+  s.add_runtime_dependency 'httpclient', '~> 2.5', '>= 2.5.0'
   s.license = 'Apache'
   s.required_ruby_version = '>= 1.9'
 end
